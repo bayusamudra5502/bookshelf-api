@@ -1,17 +1,15 @@
 /**
-    Menangani Route untuk home
-    @param {hapi.Request} req Objek Request Hapi
-    @param {hapi.ResponseToolkit} res Objek Result Hapi
+  Menangani Route untuk home
  */
-async function homeRoute(req, res) {
-  return res.response({
+async function homeHandler() {
+  return {
     status: 'OK',
     message: 'Server is running',
-  });
+  };
 }
 
 exports.default = {
   path: '/',
   method: 'GET',
-  handler: homeRoute,
+  handler: homeHandler,
 };
