@@ -1,0 +1,31 @@
+{
+  "name": "bookshelf-api",
+  "version": "1.0.0",
+  "description": "Ropsitori ini merupakan repo untuk submisi Kelas Dicoding Back-End untuk Pemula. Repository ini berisi Backend aplikasi bookshelf.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": " newman run test/Bookshelf\\ API\\ Test.postman_collection.json -- test/Bookshelf\\ API\\ Test.postman_environment.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bayusamudra5502/bookshelf-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bayusamudra5502/bookshelf-api/issues"
+  },
+  "homepage": "https://github.com/bayusamudra5502/bookshelf-api#readme",
+  "devDependencies": {
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "newman": "^5.3.2",
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2"
+  }
+}
