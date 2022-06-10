@@ -71,6 +71,10 @@ class Book {
     this.updatedAt = this.insertedAt;
   }
 
+  /**
+   * Mendapatkan data buku
+   * @returns {Object} Objek data buku
+   */
   getObject() {
     return {
       id: this.id,
@@ -88,6 +92,10 @@ class Book {
     };
   }
 
+  /**
+   * Update data buku
+   * @returns {Book} objek buku saat ini
+   */
   update({
     name, year, author, summary, publisher, pageCount, readPage, reading,
   }) {
@@ -101,6 +109,15 @@ class Book {
     this.reading = reading ?? this.reading;
 
     this.updatedAt = new Date().toISOString();
+    return this;
+  }
+
+  /**
+   * Mendapatkan ID buku
+   * @returns {string} ID
+   */
+  getId() {
+    return this.id;
   }
 }
 
