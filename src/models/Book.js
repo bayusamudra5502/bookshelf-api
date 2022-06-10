@@ -85,11 +85,19 @@ class Book {
       publisher: this.publisher,
       pageCount: this.pageCount,
       readPage: this.readPage,
-      finished: this.pageCount === this.readPage,
+      finished: this.isFinished(),
       reading: this.reading,
       insertedAt: this.insertedAt,
       updatedAt: this.updatedAt,
     };
+  }
+
+  /**
+   * Mengembalikan true bila buku sudah selesai dibaca
+   * @returns {boolean}
+   */
+  isFinished() {
+    return this.pageCount === this.readPage;
   }
 
   /**
