@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon",
-    "test": " newman run test/Bookshelf\\ API\\ Test.postman_collection.json -- test/Bookshelf\\ API\\ Test.postman_environment.json"
+    "test": "newman run test/Bookshelf\\ API\\ Test.postman_collection.json -- test/Bookshelf\\ API\\ Test.postman_environment.json"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "nodemon": "^2.0.16"
   },
   "dependencies": {
-    "@hapi/hapi": "^20.2.2"
+    "@hapi/hapi": "^20.2.2",
+    "nanoid": "^4.0.0"
   }
 }
