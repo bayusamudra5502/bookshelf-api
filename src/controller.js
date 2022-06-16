@@ -1,5 +1,5 @@
-const home = require('./routes/home').default;
-const notFound = require('./routes/notfound').default;
+const home = require('./handlers/home').default;
+const notFound = require('./handlers/404').default;
 
 /**
   Mendaftarkan semua routing yang ada
