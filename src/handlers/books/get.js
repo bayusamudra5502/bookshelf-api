@@ -8,7 +8,11 @@ async function getAllBookHandler(req) {
   const bookshelf = getBookshelf();
 
   const { name, reading, finished } = req.query;
-  const result = bookshelf.filter({ name, reading, finished }).map((book) => book.getObject());
+
+  const result = bookshelf.filter({ name, reading, finished }).map((book) => {
+    const { id, name: namaBuku, publisher } = book.getObject();
+    return { id, name: namaBuku, publisher };
+  });
 
   return {
     status: 'success',

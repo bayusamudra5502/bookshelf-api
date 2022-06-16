@@ -1,5 +1,5 @@
-const { default: Book } = require('../../models/Book');
-const { bookNameValidator, numReadValidator } = require('./validation');
+const { bookIdValidator } = require('./validation');
+
 const getBookshelf = require('../../models/getBookshelf').default;
 
 /**
@@ -7,8 +7,8 @@ const getBookshelf = require('../../models/getBookshelf').default;
   @param {hapi.Request} req Objek Request Hapi
   @param {hapi.ResponseToolkit} res Objek Result Hapi
 */
-function insertValidate(req, res) {
-  return bookNameValidator(req, res) || numReadValidator(req, res);
+function detailValidator(req, res) {
+  return bookIdValidator(req, res);
 }
 
 /**
@@ -16,26 +16,24 @@ function insertValidate(req, res) {
   @param {hapi.Request} req Objek Request Hapi
   @param {hapi.ResponseToolkit} res Objek Result Hapi
 */
-async function addBook(req, res) {
+async function editBookHandler(req, res) {
   try {
-    const validation = insertValidate(req, res);
+    const validation = detailValidator(req, res);
 
     if (validation) {
       return validation;
     }
 
-    const body = req.payload;
+    const { bookId } = req.params;
 
     const bookshelf = getBookshelf();
-    const book = new Book(body);
-
-    bookshelf.addBook(book);
+    const book = bookshelf.getBookById(bookId);
 
     return res.response({
       status: 'success',
       message: 'Buku berhasil ditambahkan',
       data: {
-        bookId: book.getId(),
+        book: book.getObject(),
       },
     }).code(201);
   } catch (e) {
@@ -49,7 +47,7 @@ async function addBook(req, res) {
 }
 
 exports.default = {
-  path: '/books',
-  method: 'POST',
-  handler: addBook,
+  path: '/books/{bookId}',
+  method: 'PUT',
+  handler: editBookHandler,
 };
