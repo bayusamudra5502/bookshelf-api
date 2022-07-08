@@ -1,5 +1,5 @@
 const { default: Book } = require('../../models/Book');
-const { errorLog } = require('../../util/logger');
+const { errorLog, infoLog } = require('../../util/logger');
 const { randomId } = require('../../util/random');
 const { bookNameValidator, numReadValidator } = require('./validation');
 const getBookshelf = require('../../models/getBookshelf').default;
@@ -32,6 +32,8 @@ async function addBook(req, res) {
     const book = new Book({ ...body, id: await randomId() });
 
     bookshelf.addBook(book);
+
+    infoLog(`Adding book with id ${book.getId()}`);
 
     return res.response({
       status: 'success',

@@ -1,4 +1,4 @@
-const { errorLog } = require('../../util/logger');
+const { errorLog, infoLog } = require('../../util/logger');
 const { bookIdValidator } = require('./validation');
 
 const getBookshelf = require('../../models/getBookshelf').default;
@@ -29,6 +29,8 @@ async function getBookDetailHandler(req, res) {
 
     const bookshelf = getBookshelf();
     const book = bookshelf.getBookById(bookId);
+
+    infoLog(`Get book detail id ${bookId}`);
 
     return res.response({
       status: 'success',

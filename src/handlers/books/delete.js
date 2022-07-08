@@ -1,6 +1,6 @@
 const { bookIdValidator } = require('./validation');
 const getBookshelf = require('../../models/getBookshelf').default;
-const { errorLog } = require('../../util/logger');
+const { errorLog, infoLog } = require('../../util/logger');
 
 /**
   Menangani Validasi dari request
@@ -28,6 +28,8 @@ async function deleteBookHandler(req, res) {
 
     const bookshelf = getBookshelf();
     bookshelf.deleteBook(bookId);
+
+    infoLog(`Delete book with id ${bookId}`);
 
     return {
       status: 'success',
