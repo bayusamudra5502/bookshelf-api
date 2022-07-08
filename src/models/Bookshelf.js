@@ -4,7 +4,7 @@ class Bookshelf {
       Kumpulan data buku
       @type {Array<Book>}
      */
-    this.bookData = {};
+    this.bookData = [];
   }
 
   /**
@@ -15,7 +15,7 @@ class Bookshelf {
   isIdExist(id) {
     if (this.bookData.length === 0) { return false; }
 
-    return this.bookData.reduce((prev, it) => id === it.getId() || prev, true);
+    return this.bookData.reduce((prev, it) => id === it.getId() || prev, false);
   }
 
   /**
@@ -28,10 +28,7 @@ class Bookshelf {
     const id = bookData.getId();
 
     if (this.isIdExist(id)) {
-      throw new Error({
-        code: 1,
-        message: 'Data buku sudah ada',
-      });
+      throw new Error('Data buku sudah ada');
     }
 
     this.bookData.push(bookData);
@@ -46,10 +43,7 @@ class Bookshelf {
    */
   deleteBook(id) {
     if (!this.isIdExist(id)) {
-      throw new Error({
-        code: 2,
-        message: 'Id buku tidak ditemukan',
-      });
+      throw new Error('Id buku tidak ditemukan');
     }
 
     this.bookData = this.bookData.filter((el) => el.getId() !== id);
@@ -64,7 +58,7 @@ class Bookshelf {
    */
   updateBook(id, bookData) {
     const book = this.getBookById(id);
-    book.updateBook(bookData);
+    book.update(bookData);
 
     return this;
   }
@@ -77,10 +71,7 @@ class Bookshelf {
    */
   getBookById(id) {
     if (!this.isIdExist(id)) {
-      throw new Error({
-        code: 2,
-        message: 'Id buku tidak ditemukan',
-      });
+      throw new Error('Id buku tidak ditemukan');
     }
 
     const book = this.bookData.filter((el) => el.getId() === id)[0];
@@ -97,7 +88,7 @@ class Bookshelf {
 
   /**
    * Mencari buku berdasarkan filter yang diberikan
-   * @param {string} name Nama buku
+   * @param {object} name Nama buku
    */
   filter({ name, reading, finished } = { name: '', reading: null, finished: null }) {
     return this.getAllBook().filter((el) => {
@@ -107,11 +98,11 @@ class Bookshelf {
         return false;
       }
 
-      if (reading !== null && el.reading !== reading) {
+      if (reading && el.reading !== (reading === '1')) {
         return false;
       }
 
-      if (finished !== null && el.isFinished() !== finished) {
+      if (finished && el.isFinished() !== (finished === '1')) {
         return false;
       }
 

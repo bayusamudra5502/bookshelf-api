@@ -1,3 +1,4 @@
+const { errorLog } = require('../../util/logger');
 const { bookIdValidator } = require('./validation');
 
 const getBookshelf = require('../../models/getBookshelf').default;
@@ -31,16 +32,17 @@ async function getBookDetailHandler(req, res) {
 
     return res.response({
       status: 'success',
-      message: 'Buku berhasil ditambahkan',
+      message: 'Buku berhasil diambil',
       data: {
         book: book.getObject(),
       },
-    }).code(201);
+    }).code(200);
   } catch (e) {
+    errorLog(e.message);
     return res.response(
       {
         status: 'error',
-        message: 'Buku gagal ditambahkan',
+        message: 'Buku gagal diambil',
       },
     ).code(500);
   }

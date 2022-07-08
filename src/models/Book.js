@@ -1,14 +1,12 @@
-const { nanoid } = import('nanoid');
-
 class Book {
   constructor({
-    name, year, author, summary, publihser, pageCount, readPage, reading,
+    id, name, year, author, summary, publisher, pageCount, readPage, reading,
   }) {
     /**
       ID Buku
       @type {string}
      */
-    this.id = nanoid(12);
+    this.id = id;
 
     /**
       Nama buku
@@ -38,7 +36,7 @@ class Book {
       Peneribit buku
       @type {string}
      */
-    this.publisher = publihser;
+    this.publisher = publisher;
 
     /**
       Jumlah halaman

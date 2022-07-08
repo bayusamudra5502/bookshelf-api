@@ -1,5 +1,6 @@
 const { bookIdValidator } = require('./validation');
-const getBookshelf = require('../../models/getBookshelf');
+const getBookshelf = require('../../models/getBookshelf').default;
+const { errorLog } = require('../../util/logger');
 
 /**
   Menangani Validasi dari request
@@ -7,7 +8,7 @@ const getBookshelf = require('../../models/getBookshelf');
   @param {hapi.ResponseToolkit} res Objek Result Hapi
 */
 function detailValidator(req, res) {
-  return bookIdValidator(req, res);
+  return bookIdValidator(req, res, 'Buku gagal dihapus. Id tidak ditemukan');
 }
 
 /**
@@ -28,11 +29,12 @@ async function deleteBookHandler(req, res) {
     const bookshelf = getBookshelf();
     bookshelf.deleteBook(bookId);
 
-    return res.response({
+    return {
       status: 'success',
       message: 'Buku berhasil dihapus',
-    }).code(201);
+    };
   } catch (e) {
+    errorLog(e.message);
     return res.response(
       {
         status: 'error',

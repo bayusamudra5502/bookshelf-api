@@ -1,3 +1,4 @@
+const { errorLog } = require('../../util/logger');
 const { bookIdValidator, bookNameValidator, numReadValidator } = require('./validation');
 
 const getBookshelf = require('../../models/getBookshelf').default;
@@ -8,9 +9,9 @@ const getBookshelf = require('../../models/getBookshelf').default;
   @param {hapi.ResponseToolkit} res Objek Result Hapi
 */
 function detailValidator(req, res) {
-  return bookIdValidator(req, res)
-    || bookNameValidator(req, res)
-    || numReadValidator(req, res);
+  return bookIdValidator(req, res, 'Gagal memperbarui buku. Id tidak ditemukan')
+    || bookNameValidator(req, res, 'Gagal memperbarui buku. Mohon isi nama buku')
+    || numReadValidator(req, res, 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount');
 }
 
 /**
@@ -34,14 +35,15 @@ async function editBookHandler(req, res) {
 
     const book = bookshelf.getBookById(bookId);
 
-    return res.response({
+    return {
       status: 'success',
       message: 'Buku berhasil diperbarui',
       data: {
         book: book.getObject(),
       },
-    }).code(201);
+    };
   } catch (e) {
+    errorLog(e.message);
     return res.response(
       {
         status: 'error',

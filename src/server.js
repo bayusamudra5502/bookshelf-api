@@ -1,6 +1,6 @@
 const hapi = require('@hapi/hapi');
-const process = require('node:process');
 const { routeRegister } = require('./controller');
+const { infoLog } = require('./util/logger');
 
 /**
     Loader Backend API
@@ -8,7 +8,7 @@ const { routeRegister } = require('./controller');
 * */
 async function serverLoader() {
   const app = hapi.server({
-    host: '0.0.0.0',
+    host: process.env.HOST ?? 'localhost',
     port: process.env.PORT ?? 8080,
     routes: {
       cors: {
@@ -21,7 +21,7 @@ async function serverLoader() {
 
   await app.start();
 
-  process.stdout.write(`Server berjalan pada ${app.info.uri}\n`);
+  infoLog(`Server berjalan pada ${app.info.uri}`);
 }
 
 serverLoader();
