@@ -32,7 +32,7 @@ exports.bookIdValidator = bookIdValidator;
 function bookNameValidator(req, res, message = 'Gagal menambahkan buku. Mohon isi nama buku') {
   const body = req.payload;
 
-  if (!body.name) {
+  if (!body?.name) {
     return res.response(
       {
         status: 'fail',
@@ -55,7 +55,7 @@ exports.bookNameValidator = bookNameValidator;
 function numReadValidator(req, res, message = 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount') {
   const body = req.payload;
 
-  if (body.readPage > body.pageCount) {
+  if (body?.readPage > body?.pageCount) {
     return res.response(
       {
         status: 'fail',
