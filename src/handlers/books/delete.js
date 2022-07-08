@@ -1,6 +1,5 @@
 const { bookIdValidator } = require('./validation');
-
-const getBookshelf = require('../../models/getBookshelf').default;
+const getBookshelf = require('../../models/getBookshelf');
 
 /**
   Menangani Validasi dari request
@@ -12,11 +11,11 @@ function detailValidator(req, res) {
 }
 
 /**
-  Menangani Route untuk alamat yang tidak ada
+  Menangani Route untuk menghapus buku
   @param {hapi.Request} req Objek Request Hapi
   @param {hapi.ResponseToolkit} res Objek Result Hapi
 */
-async function getBookDetailHandler(req, res) {
+async function deleteBookHandler(req, res) {
   try {
     const validation = detailValidator(req, res);
 
@@ -27,20 +26,17 @@ async function getBookDetailHandler(req, res) {
     const { bookId } = req.params;
 
     const bookshelf = getBookshelf();
-    const book = bookshelf.getBookById(bookId);
+    bookshelf.deleteBook(bookId);
 
     return res.response({
       status: 'success',
-      message: 'Buku berhasil ditambahkan',
-      data: {
-        book: book.getObject(),
-      },
+      message: 'Buku berhasil dihapus',
     }).code(201);
   } catch (e) {
     return res.response(
       {
         status: 'error',
-        message: 'Buku gagal ditambahkan',
+        message: 'Buku gagal dihapus',
       },
     ).code(500);
   }
@@ -48,6 +44,6 @@ async function getBookDetailHandler(req, res) {
 
 exports.default = {
   path: '/books/{bookId}',
-  method: 'GET',
-  handler: getBookDetailHandler,
+  method: 'DELETE',
+  handler: deleteBookHandler,
 };

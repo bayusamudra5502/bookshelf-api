@@ -1,5 +1,6 @@
 const home = require('./handlers/home').default;
 const notFound = require('./handlers/404').default;
+const bookRegister = require('./handlers/books').default;
 
 /**
   Mendaftarkan semua routing yang ada
@@ -8,6 +9,7 @@ const notFound = require('./handlers/404').default;
 * */
 async function routeRegister(app) {
   app.route(home);
+  bookRegister(app);
   app.route(notFound);
 }
 

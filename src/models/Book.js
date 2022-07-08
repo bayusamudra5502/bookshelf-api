@@ -1,4 +1,4 @@
-const { nanoid } = require('nanoid');
+const { nanoid } = import('nanoid');
 
 class Book {
   constructor({
