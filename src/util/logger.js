@@ -1,4 +1,4 @@
-const process = require('node:process');
+const process = require('process');
 
 function getTime() {
   return (new Date()).toISOString();
