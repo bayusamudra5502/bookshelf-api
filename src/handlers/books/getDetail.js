@@ -1,7 +1,6 @@
-const { errorLog, infoLog } = require('../../util/logger');
-const { bookIdValidator } = require('./validation');
-
-const getBookshelf = require('../../models/getBookshelf').default;
+import { errorLog, infoLog } from '../../utils/logger.js';
+import { bookIdValidator } from './validation.js';
+import getBookshelf from '../../models/getBookshelf.js';
 
 /**
   Menangani Validasi dari request
@@ -50,7 +49,7 @@ async function getBookDetailHandler(req, res) {
   }
 }
 
-exports.default = {
+export default {
   path: '/books/{bookId}',
   method: 'GET',
   handler: getBookDetailHandler,

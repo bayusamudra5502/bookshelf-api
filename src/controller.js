@@ -1,6 +1,6 @@
-const home = require('./handlers/home').default;
-const notFound = require('./handlers/404').default;
-const bookRegister = require('./handlers/books').default;
+import home from './handlers/home.js';
+import notFound from './handlers/404.js';
+import bookRegister from './handlers/books/index.js';
 
 /**
   Mendaftarkan semua routing yang ada
@@ -13,4 +13,4 @@ async function routeRegister(app) {
   app.route(notFound);
 }
 
-exports.routeRegister = routeRegister;
+export default routeRegister;

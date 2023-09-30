@@ -1,10 +1,10 @@
-class Bookshelf {
+export default class Bookshelf {
   constructor() {
     /**
       Kumpulan data buku
-      @type {Array<Book>}
+      @type {Map<string, Book>}
      */
-    this.bookData = [];
+    this.bookData = new Map();
   }
 
   /**
@@ -13,9 +13,7 @@ class Bookshelf {
    * @returns {boolean}
    */
   isIdExist(id) {
-    if (this.bookData.length === 0) { return false; }
-
-    return this.bookData.reduce((prev, it) => id === it.getId() || prev, false);
+    return this.bookData.has(id);
   }
 
   /**
@@ -31,7 +29,7 @@ class Bookshelf {
       throw new Error('Data buku sudah ada');
     }
 
-    this.bookData.push(bookData);
+    this.bookData.set(id, bookData);
     return this;
   }
 
@@ -46,7 +44,7 @@ class Bookshelf {
       throw new Error('Id buku tidak ditemukan');
     }
 
-    this.bookData = this.bookData.filter((el) => el.getId() !== id);
+    this.bookData.delete(id);
     return this;
   }
 
@@ -74,7 +72,7 @@ class Bookshelf {
       throw new Error('Id buku tidak ditemukan');
     }
 
-    const book = this.bookData.filter((el) => el.getId() === id)[0];
+    const book = this.bookData.get(id);
     return book;
   }
 
@@ -83,7 +81,7 @@ class Bookshelf {
    * @returns {Array<Book>} Array dari buku
    */
   getAllBook() {
-    return this.bookData;
+    return [...this.bookData.values()];
   }
 
   /**
@@ -110,5 +108,3 @@ class Bookshelf {
     });
   }
 }
-
-exports.default = Bookshelf;

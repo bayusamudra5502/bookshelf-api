@@ -1,4 +1,4 @@
-const getBookshelf = require('../../models/getBookshelf').default;
+import getBookshelf from '../../models/getBookshelf.js';
 
 /**
   Menangani Validasi dari request
@@ -7,7 +7,7 @@ const getBookshelf = require('../../models/getBookshelf').default;
   @param {string} message Pesan Custom error (Opsional)
 */
 
-function bookIdValidator(req, res, message = 'Buku tidak ditemukan') {
+export function bookIdValidator(req, res, message = 'Buku tidak ditemukan') {
   const { bookId } = req.params;
   const bookshelf = getBookshelf();
 
@@ -21,15 +21,13 @@ function bookIdValidator(req, res, message = 'Buku tidak ditemukan') {
   return null;
 }
 
-exports.bookIdValidator = bookIdValidator;
-
 /**
  Melakukan validasi pada nama buku
   @param {hapi.Request} req Objek Request Hapi
   @param {hapi.ResponseToolkit} res Objek Result Hapi
   @param {string} message Pesan Custom error (Opsional)
  */
-function bookNameValidator(req, res, message = 'Gagal menambahkan buku. Mohon isi nama buku') {
+export function bookNameValidator(req, res, message = 'Gagal menambahkan buku. Mohon isi nama buku') {
   const body = req.payload;
 
   if (!body?.name) {
@@ -44,15 +42,13 @@ function bookNameValidator(req, res, message = 'Gagal menambahkan buku. Mohon is
   return null;
 }
 
-exports.bookNameValidator = bookNameValidator;
-
 /**
   Melakukan validasi jumlah halaman yang dibaca
   @param {hapi.Request} req Objek Request Hapi
   @param {hapi.ResponseToolkit} res Objek Result Hapi
   @param {string} message Pesan Custom error (Opsional)
 */
-function numReadValidator(req, res, message = 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount') {
+export function numReadValidator(req, res, message = 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount') {
   const body = req.payload;
 
   if (body?.readPage > body?.pageCount) {
@@ -66,5 +62,3 @@ function numReadValidator(req, res, message = 'Gagal menambahkan buku. readPage 
 
   return null;
 }
-
-exports.numReadValidator = numReadValidator;

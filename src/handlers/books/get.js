@@ -1,6 +1,5 @@
-const { infoLog } = require('../../util/logger');
-
-const getBookshelf = require('../../models/getBookshelf').default;
+import { infoLog } from '../../utils/logger.js';
+import getBookshelf from '../../models/getBookshelf.js';
 
 function getLog({
   name, reading, finished, length,
@@ -44,7 +43,7 @@ async function getAllBookHandler(req) {
   };
 }
 
-exports.default = {
+export default {
   path: '/books',
   method: 'GET',
   handler: getAllBookHandler,

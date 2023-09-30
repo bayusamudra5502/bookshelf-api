@@ -1,4 +1,4 @@
-class Book {
+export default class Book {
   constructor({
     id, name, year, author, summary, publisher, pageCount, readPage, reading,
   }) {
@@ -126,5 +126,3 @@ class Book {
     return this.id;
   }
 }
-
-exports.default = Book;

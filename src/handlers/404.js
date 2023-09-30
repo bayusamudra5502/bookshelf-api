@@ -10,7 +10,7 @@ async function notFoundHandler(req, res) {
   }).code(404);
 }
 
-exports.default = {
+export default {
   path: '/{any*}',
   method: '*',
   handler: notFoundHandler,

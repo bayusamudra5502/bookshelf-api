@@ -1,6 +1,6 @@
-const { bookIdValidator } = require('./validation');
-const getBookshelf = require('../../models/getBookshelf').default;
-const { errorLog, infoLog } = require('../../util/logger');
+import { bookIdValidator } from './validation.js';
+import getBookshelf from '../../models/getBookshelf.js';
+import { errorLog, infoLog } from '../../utils/logger.js';
 
 /**
   Menangani Validasi dari request
@@ -46,7 +46,7 @@ async function deleteBookHandler(req, res) {
   }
 }
 
-exports.default = {
+export default {
   path: '/books/{bookId}',
   method: 'DELETE',
   handler: deleteBookHandler,

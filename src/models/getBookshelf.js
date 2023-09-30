@@ -1,4 +1,4 @@
-const { default: Bookshelf } = require('./Bookshelf');
+import Bookshelf from './Bookshelf.js';
 
 let bookshelf = null;
 
@@ -7,10 +7,10 @@ let bookshelf = null;
  * atau buat baru jika belum ada
  * @returns {Bookshelf} Objek bookshelf
  */
-exports.default = function getBookshelf() {
+export default function getBookshelf() {
   if (!bookshelf) {
     bookshelf = new Bookshelf();
   }
 
   return bookshelf;
-};
+}

@@ -1,8 +1,8 @@
-const { default: Book } = require('../../models/Book');
-const { errorLog, infoLog } = require('../../util/logger');
-const { randomId } = require('../../util/random');
-const { bookNameValidator, numReadValidator } = require('./validation');
-const getBookshelf = require('../../models/getBookshelf').default;
+import Book from '../../models/Book.js';
+import { errorLog, infoLog } from '../../utils/logger.js';
+import randomId from '../../utils/random.js';
+import { bookNameValidator, numReadValidator } from './validation.js';
+import getBookshelf from '../../models/getBookshelf.js';
 
 /**
   Menangani Validasi dari request
@@ -53,7 +53,7 @@ async function addBook(req, res) {
   }
 }
 
-exports.default = {
+export default {
   path: '/books',
   method: 'POST',
   handler: addBook,

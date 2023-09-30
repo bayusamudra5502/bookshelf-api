@@ -1,8 +1,8 @@
-const addBookHandler = require('./add').default;
-const getBookHandler = require('./get').default;
-const deleteBookHandler = require('./delete').default;
-const editBookHandler = require('./editBook').default;
-const getBookDetailHandler = require('./getDetail').default;
+import addBookHandler from './add.js';
+import getBookHandler from './get.js';
+import deleteBookHandler from './delete.js';
+import editBookHandler from './editBook.js';
+import getBookDetailHandler from './getDetail.js';
 
 /**
   Mendaftarkan semua routing pada books handler
@@ -17,4 +17,4 @@ async function routeRegister(app) {
   app.route(getBookDetailHandler);
 }
 
-exports.default = routeRegister;
+export default routeRegister;

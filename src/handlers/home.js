@@ -8,7 +8,7 @@ async function homeHandler() {
   };
 }
 
-exports.default = {
+export default {
   path: '/',
   method: 'GET',
   handler: homeHandler,
